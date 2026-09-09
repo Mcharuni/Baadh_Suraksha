@@ -37,7 +37,7 @@ export interface SystemState {
   logs: { time: string, msg: string }[];
 }
 
-const API_URL = 'http://localhost:8000/api/state';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/state';
 
 function App() {
   const [state, setState] = useState<SystemState | null>(null);
