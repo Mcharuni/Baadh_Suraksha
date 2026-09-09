@@ -157,7 +157,30 @@
   justify-content: center;
 }
 
-.flow-arrows { font-size: 0.7rem; color: white; letter-spacing: 4px; }
+.rain-animation {
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(135deg, rgba(56, 189, 248, 0.4) 0px, rgba(56, 189, 248, 0.4) 2px, transparent 2px, transparent 10px);
+  animation: rain-fall 0.4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rain-fall {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 40px; }
+}
+
+.flow-arrows {
+  font-size: 0.75rem;
+  color: white;
+  letter-spacing: 6px;
+  animation: stream-flow 0.8s linear infinite;
+}
+
+@keyframes stream-flow {
+  0% { transform: translateX(-15px); }
+  100% { transform: translateX(15px); }
+}
 
 .gate-section {
   display: flex;
@@ -170,7 +193,18 @@
 
 .gate-label { font-size: 0.75rem; color: #94a3b8; }
 
-.diversion-gate.open .gate-door { color: #38bdf8; font-weight: 700; font-size: 0.75rem; }
+.diversion-gate.open .gate-door { 
+  color: #38bdf8; 
+  font-weight: 700; 
+  font-size: 0.75rem;
+  animation: pulse-gate 1.5s infinite alternate;
+}
+
+@keyframes pulse-gate {
+  0% { text-shadow: 0 0 2px #38bdf8; }
+  100% { text-shadow: 0 0 10px #38bdf8; }
+}
+
 .diversion-gate.closed .gate-door { color: #64748b; font-size: 0.75rem; }
 
 .diversion-stream {
@@ -181,6 +215,12 @@
   padding: 0.2rem;
   background: rgba(56, 189, 248, 0.1);
   border-radius: 4px;
+  animation: flow-down 1s linear infinite alternate;
+}
+
+@keyframes flow-down {
+  0% { opacity: 0.6; }
+  100% { opacity: 1; }
 }
 
 .storage-tank-section {
