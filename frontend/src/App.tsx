@@ -12,6 +12,7 @@ import CloudDashboard from './components/CloudDashboard';
 import PowerSubsystem from './components/PowerSubsystem';
 import DisasterTimeline from './components/DisasterTimeline';
 import GuidedDemo from './components/GuidedDemo';
+import ArchitectureView from './components/ArchitectureView';
 import { Activity } from 'lucide-react';
 
 export interface SystemState {
@@ -45,7 +46,7 @@ const DEMO_URL = API_URL.replace('/api/state', '/api/demo');
 function App() {
   const [state, setState] = useState<SystemState | null>(null);
   const [cloudState, setCloudState] = useState<SystemState | null>(null);
-  const [activeView, setActiveView] = useState<'simulation' | 'cloud'>('simulation');
+  const [activeView, setActiveView] = useState<'simulation' | 'cloud' | 'architecture'>('simulation');
   const [lastSyncTime, setLastSyncTime] = useState<string>('');
 
   const fetchState = async () => {
@@ -113,6 +114,12 @@ function App() {
           >
             FloodShield Cloud
           </button>
+          <button 
+            className={activeView === 'architecture' ? 'active' : ''} 
+            onClick={() => setActiveView('architecture')}
+          >
+            System Architecture
+          </button>
         </div>
       </header>
 
@@ -127,8 +134,10 @@ function App() {
         <div className="simulation-panel">
           {activeView === 'simulation' ? (
             <SimulationView state={state} />
-          ) : (
+          ) : activeView === 'cloud' ? (
             cloudState && <CloudDashboard state={cloudState} networkStatus={state.network_status} />
+          ) : (
+            <ArchitectureView state={state} />
           )}
         </div>
         <div className="side-panel">
