@@ -193,3 +193,78 @@ def update_state(update: StateUpdate, db: Session = Depends(get_db)):
     response_data['logs'] = [{"time": log.timestamp, "msg": log.message} for log in logs]
     
     return response_data
+
+@app.post("/api/demo/{mode}")
+def run_demo(mode: str, db: Session = Depends(get_db)):
+    state = db.query(SystemState).first()
+    if not state:
+        state = SystemState()
+        db.add(state)
+
+    timestamp = datetime.now().strftime("%H:%M:%S")
+
+    if mode == "normal":
+        state.rainfall_intensity = 0.0
+        state.zone1_water_level = 5.0
+        state.zone2_water_level = 5.0
+        state.zone3_water_level = 5.0
+        state.zone1_flow = 10.0
+        state.zone2_flow = 10.0
+        state.zone3_flow = 10.0
+        state.electrical_hazard = False
+        state.manhole_displacement = False
+        state.debris_blockage = False
+        state.blockage_suspected = False
+        state.emergency_status = False
+        state.system_status = "NORMAL"
+        state.gate_status = False
+        state.pump_status = False
+        state.storage_level = 0.0
+        db.add(EventLog(timestamp=timestamp, message="DEMO MODE: System reset to NORMAL standby state"))
+
+    elif mode == "flood":
+        state.rainfall_intensity = 90.0
+        state.zone1_water_level = 95.0
+        state.zone2_water_level = 88.0
+        state.zone3_water_level = 92.0
+        state.zone1_flow = 75.0
+        state.zone2_flow = 70.0
+        state.zone3_flow = 80.0
+        state.electrical_hazard = True
+        state.manhole_displacement = True
+        state.debris_blockage = True
+        state.emergency_status = True
+        state.system_status = "CRITICAL"
+        state.gate_status = True
+        state.pump_status = True
+        state.storage_level = 65.0
+        db.add(EventLog(timestamp=timestamp, message="DEMO MODE: SIMULATED SEVERE FLOOD DISASTER INITIATED"))
+
+    elif mode == "recovery":
+        state.rainfall_intensity = 15.0
+        state.zone1_water_level = 35.0
+        state.zone2_water_level = 30.0
+        state.zone3_water_level = 25.0
+        state.zone1_flow = 20.0
+        state.zone2_flow = 20.0
+        state.zone3_flow = 20.0
+        state.electrical_hazard = False
+        state.manhole_displacement = False
+        state.debris_blockage = False
+        state.blockage_suspected = False
+        state.emergency_status = False
+        state.system_status = "RECOVERY"
+        state.gate_status = False
+        state.pump_status = True
+        state.storage_level = 20.0
+        db.add(EventLog(timestamp=timestamp, message="DEMO MODE: RECOVERY PHASE & DRAINAGE VERIFICATION STARTED"))
+
+    db.commit()
+    db.refresh(state)
+
+    logs = db.query(EventLog).order_by(EventLog.id.desc()).limit(10).all()
+    response_data = {col.name: getattr(state, col.name) for col in state.__table__.columns}
+    response_data['logs'] = [{"time": log.timestamp, "msg": log.message} for log in logs]
+
+    return response_data
+

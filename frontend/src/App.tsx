@@ -10,6 +10,7 @@ import EventLogPanel from './components/EventLogPanel';
 import CommunicationPanel from './components/CommunicationPanel';
 import CloudDashboard from './components/CloudDashboard';
 import PowerSubsystem from './components/PowerSubsystem';
+import DisasterTimeline from './components/DisasterTimeline';
 import { Activity } from 'lucide-react';
 
 export interface SystemState {
@@ -38,6 +39,7 @@ export interface SystemState {
 }
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8000/api/state';
+const DEMO_URL = API_URL.replace('/api/state', '/api/demo');
 
 function App() {
   const [state, setState] = useState<SystemState | null>(null);
@@ -65,6 +67,18 @@ function App() {
       setState(res.data);
     } catch (err) {
       console.error("Failed to update state", err);
+    }
+  };
+
+  const runDemo = async (mode: 'normal' | 'flood' | 'recovery') => {
+    try {
+      const res = await axios.post(`${DEMO_URL}/${mode}`);
+      setState(res.data);
+      if (res.data.network_status) {
+        setCloudState(res.data);
+      }
+    } catch (err) {
+      console.error("Failed to run demo mode", err);
     }
   };
 
@@ -100,6 +114,8 @@ function App() {
           </button>
         </div>
       </header>
+
+      <DisasterTimeline state={state} onRunDemo={runDemo} />
 
       <div className="main-layout">
         <div className="sensor-panel">
