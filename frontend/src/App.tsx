@@ -13,6 +13,7 @@ import PowerSubsystem from './components/PowerSubsystem';
 import DisasterTimeline from './components/DisasterTimeline';
 import GuidedDemo from './components/GuidedDemo';
 import ArchitectureView from './components/ArchitectureView';
+import LiveDigitalTwinView from './components/LiveDigitalTwinView';
 import { Activity } from 'lucide-react';
 
 export interface SystemState {
@@ -46,6 +47,7 @@ const DEMO_URL = API_URL.replace('/api/state', '/api/demo');
 function App() {
   const [state, setState] = useState<SystemState | null>(null);
   const [cloudState, setCloudState] = useState<SystemState | null>(null);
+  const [appMode, setAppMode] = useState<'dashboard' | 'twin'>('dashboard');
   const [activeView, setActiveView] = useState<'simulation' | 'cloud' | 'architecture'>('simulation');
   const [lastSyncTime, setLastSyncTime] = useState<string>('');
 
@@ -94,6 +96,18 @@ function App() {
     return <div style={{ color: 'white', padding: '2rem' }}>Initializing Hardware Interface...</div>;
   }
 
+  // MODE 2 — 🎬 LIVE HARDWARE DIGITAL TWIN SIMULATION (Full Screen Video Mode)
+  if (appMode === 'twin') {
+    return (
+      <LiveDigitalTwinView 
+        state={state} 
+        onUpdateState={updateState} 
+        onBackToDashboard={() => setAppMode('dashboard')} 
+      />
+    );
+  }
+
+  // MODE 1 — 📊 STATIC MONITORING DASHBOARD (Preserved 100% Intact)
   return (
     <div className="App">
       <header className="App-header">
@@ -101,7 +115,19 @@ function App() {
           <Activity className="header-icon" />
           <h1>BAADH SURAKSHA <span>System Control</span></h1>
         </div>
+
+        {/* Mode Selector & View Switcher */}
         <div className="view-toggle">
+          <button 
+            className="active-mode-btn"
+            onClick={() => setAppMode('twin')}
+            style={{ background: 'linear-gradient(135deg, #0284c7, #38bdf8)', color: '#0f172a', fontWeight: 800 }}
+          >
+            🎬 LIVE HARDWARE SIMULATION
+          </button>
+
+          <span style={{ color: '#475569', margin: '0 4px' }}>|</span>
+
           <button 
             className={activeView === 'simulation' ? 'active' : ''} 
             onClick={() => setActiveView('simulation')}
