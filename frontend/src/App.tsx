@@ -11,6 +11,7 @@ import CommunicationPanel from './components/CommunicationPanel';
 import CloudDashboard from './components/CloudDashboard';
 import PowerSubsystem from './components/PowerSubsystem';
 import DisasterTimeline from './components/DisasterTimeline';
+import GuidedDemo from './components/GuidedDemo';
 import { Activity } from 'lucide-react';
 
 export interface SystemState {
@@ -115,6 +116,7 @@ function App() {
         </div>
       </header>
 
+      <GuidedDemo onUpdateState={updateState} />
       <DisasterTimeline state={state} onRunDemo={runDemo} />
 
       <div className="main-layout">
