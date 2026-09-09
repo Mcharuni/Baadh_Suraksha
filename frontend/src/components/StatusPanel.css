@@ -1,0 +1,44 @@
+.status-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.status-panel h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.status-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #94a3b8;
+}
+
+.status-val {
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+}
+
+.status-val.active { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+.status-val.inactive { background: rgba(100, 116, 139, 0.2); color: #94a3b8; }
+.status-val.mode-critical { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+.status-val.mode-warning { background: rgba(245, 158, 11, 0.2); color: #fbbf24; }
+.status-val.mode-normal { background: rgba(16, 185, 129, 0.2); color: #34d399; }

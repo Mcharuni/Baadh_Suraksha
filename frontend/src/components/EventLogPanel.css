@@ -1,0 +1,54 @@
+.event-log-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  max-height: 180px;
+  display: flex;
+  flex-direction: column;
+}
+
+.event-log-panel h2 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding-bottom: 0.3rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.log-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.log-item {
+  font-size: 0.7rem;
+  display: flex;
+  gap: 0.4rem;
+  color: #cbd5e1;
+}
+
+.log-time {
+  color: #38bdf8;
+  font-weight: 600;
+  font-family: monospace;
+}
+
+.log-msg {
+  color: #94a3b8;
+}
+
+.empty-log {
+  font-size: 0.7rem;
+  color: #64748b;
+  font-style: italic;
+}

@@ -1,0 +1,93 @@
+.App {
+  width: 100vw;
+  min-height: 100vh;
+  background-color: #090d16;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-header {
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.header-icon {
+  color: #38bdf8;
+}
+
+.title-area h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.title-area h1 span {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: #94a3b8;
+  margin-left: 0.5rem;
+}
+
+.view-toggle {
+  display: flex;
+  background: rgba(30, 41, 59, 0.6);
+  border-radius: 8px;
+  padding: 3px;
+  gap: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.view-toggle button {
+  background: transparent;
+  border: none;
+  color: #94a3b8;
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.view-toggle button.active {
+  background: #38bdf8;
+  color: #0f172a;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.4);
+}
+
+.main-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr 340px;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  flex: 1;
+}
+
+.sensor-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.simulation-panel {
+  display: flex;
+  flex-direction: column;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}

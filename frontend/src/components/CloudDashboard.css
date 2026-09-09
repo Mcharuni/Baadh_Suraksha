@@ -1,0 +1,73 @@
+.cloud-dashboard {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-height: 520px;
+}
+
+.cloud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1rem;
+}
+
+.cloud-title {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.cloud-title .icon { color: #38bdf8; }
+.cloud-title h2 { margin: 0; font-size: 1.1rem; color: #f8fafc; }
+.cloud-title p { margin: 0; font-size: 0.8rem; color: #94a3b8; }
+
+.network-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 20px;
+}
+
+.network-badge.online { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+.network-badge.offline { background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); }
+
+.network-warning-banner {
+  background: rgba(239, 68, 68, 0.15);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #f87171;
+}
+
+.network-warning-banner h3 { margin: 0; font-size: 0.9rem; }
+.network-warning-banner p { margin: 0; font-size: 0.8rem; color: #fca5a5; }
+
+.cloud-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.cloud-card {
+  background: rgba(30, 41, 59, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cloud-card .card-label { font-size: 0.75rem; color: #94a3b8; }
+.cloud-card .card-val { font-size: 1.1rem; font-weight: 700; color: #f8fafc; }
